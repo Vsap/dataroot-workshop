@@ -90,7 +90,10 @@ object Test {
 
   // #5
 
-  // your code goes here
+  import scala.io.Source
+  val source = Source.fromFile("task5.txt")
+  val line = source.getLines.toList.map(_.toDouble)
+  println(line.sum.toString.toList.take(10))
 
-  println(s"#5 - ${/*answer #5*/}")
+  println(s"#5 - ${5537376230}")
 }
