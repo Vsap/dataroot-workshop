@@ -20,7 +20,7 @@ object Test {
   val check = decrypt(word)
   val Key: Int = 7
   val PlainWordIs = "NOTHINGCREATESSUCCESSLIKENONSTOPENTHUSIASTICEFFORT"
-  println(s"#1 - ${}")
+  println(s"#1 - ${"ncslnee"}")
 
   // #2
 
@@ -44,13 +44,21 @@ object Test {
     list.length-2*list.sum
   }
   val Answer = dif((add(b1short, b2)._2) ++ b1rest) //73
-  println(s"#2 - ${/*answer #2*/}")
+  println(s"#2 - ${73}")
 
   // #3
-
-  // your code goes here
-
-  println(s"#3 - ${/*answer #3*/}")
+  def palSum(current:Int,stay:Int, sum: Int):Int = isPal(current.toBinaryString.toList) match{
+    case true => if(stay > 0) palSum(current+1,stay-1,sum+current) else sum
+    case false => if(stay > 0) palSum(current+1,stay,sum) else sum
+    case _ => sum
+  }
+  def isPal[A](l: List[A]):Boolean = l match {
+    case List() => true
+    case List(_) => true
+    case h::t => (h == t.last && isPal(t.init))
+  }
+  println(palSum(1,73,0))
+  println(s"#3 - ${34223}")
 
   // #4
 
