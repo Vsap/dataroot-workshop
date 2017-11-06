@@ -62,9 +62,31 @@ object Test {
 
   // #4
 
-  // your code goes here
+  val set = List(-1, -1, -2, -2, 1, -5, 1, 0, 1, 14, -8, 4, 5, -11, 13, 5, 7, -10, -4, 3, -6, 8, 6, 2, -9, -1, -4, 0)
+  def tripleGen(set:List[Int]): Set[(Int,Int,Int)] ={
+    ((for{
+      i <- set.filter(_ > 0).distinct
+      j<- set.filter(_ < 0).distinct
+      k <- (set.filter(_ < 0).takeWhile(_ != j) ++
+        set.filter(_ < 0).dropWhile(_ != j)).filter(_ < j)
+      if i+j+k == 0
+    } yield (i,j,k)) ++
+      (for{
+        i <- set.filter(_ < 0).distinct
+        j<- set.filter(_ > 0).distinct
+        k <- (set.filter(_ > 0).takeWhile(_ != j) ++
+          set.filter(_ > 0).dropWhile(_ != j)).filter(_ >= j)
+        if i+j+k == 0
+      } yield (i,j,k)) ++
+      (for{
+        i <- set.filter(_ > 0).distinct
+        j <- set.filter(_ < 0).distinct
+        if i+j==0
+      } yield (i,0,j))).toSet
+  }
+  println(tripleGen(set).size)
 
-  println(s"#4 - ${/*answer #4*/}")
+  println(s"#4 - ${42}")
 
   // #5
 
